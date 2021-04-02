@@ -4,10 +4,18 @@ Title: Exposure estimation from concentration data
 Version: 0.1.0
 Authors@R: c(
     person("Alexander", "East", email = "East.Alexander@epa.gov", role = "cre"),
+    person("Alexander", "East", email = "East.Alexander@epa.gov", role = "aut"),
     person("Peter", "Egeghy", role = "aut"),
     person("Matthew", "Lorber", role = "aut"),
+    person("Dan", "Dawson", role = "aut"),
     person("Dan", "Vallero", role = "aut"))
-Description: Lorber-Egeghy Method of exposure analysis.
+Description: Lorber-Egeghy Method of exposure analysis, as described in Egeghy & Lorber:
+              "An assessment of the exposure of Americans to perfluorooctane 
+              sulfonate: a comparison of estimated intake with values inferred from 
+              NHANES data"(https://pubmed.ncbi.nlm.nih.gov/20145679/)and Lorber & Egeghy:
+              Simple intake and pharmacokinetic modeling to characterize exposure of Americans to 
+              perfluoroctanoic acid, PFOA(https://pubmed.ncbi.nlm.nih.gov/21517063/)
+              
 Imports: dplyr, 
          rio
 License: GPL-3
