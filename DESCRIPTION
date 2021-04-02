@@ -7,7 +7,6 @@ Author: Authors@R: c(
     person("Peter", "Egeghy", role = "aut"),
     person("Matthew", "Lorber", role = "aut"),
     person("Dan", "Vallero", role = "aut"))
-Maintainer: east.alexander@epa.gov
 Description: Lorber-Egeghy Method of exposure analysis.
 Imports: dplyr, 
          rio
