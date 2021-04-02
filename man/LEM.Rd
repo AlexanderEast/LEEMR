@@ -1,5 +1,5 @@
-\name{LEM}
-\alias{Lorber Egeghy Model}
+\name{Lorber-Egeghy Model}
+\alias{LEM}
 \title{Concentration Summary Statistics to Estimated Exposure Curves.}
 \usage{
 LEM(df,ef,n)
