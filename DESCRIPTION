@@ -2,7 +2,7 @@ Package: LorberEgeghyModel
 Type: Package
 Title: Exposure estimation from concentration data
 Version: 0.1.0
-Author: Authors@R: c(
+Authors@R: c(
     person("Alexander", "East", email = "East.Alexander@epa.gov", role = "cre"),
     person("Peter", "Egeghy", role = "aut"),
     person("Matthew", "Lorber", role = "aut"),
