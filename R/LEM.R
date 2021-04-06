@@ -7,7 +7,7 @@
 LEM <- function(df,wt,expf,expunits, n, seed){
 
   #1. Units
-  data<- df
+  #data<- df
   data<- data %>% dplyr::mutate(UNITFACTOR = case_when(
     (Units %in% c("ng/m³","ng/L","ng/g","µg/kg","ug/kg","pg/mL","pg/ml")) ~ 1,
     (Units %in% c("pg/m³","pg/g")) ~ 0.001,
@@ -75,10 +75,9 @@ LEM <- function(df,wt,expf,expunits, n, seed){
   data <- data %>% mutate(GSD = if_else(!is.na(GSD),GSD ,exp(log(Max/GM)/qnorm(1-1/`Sample Size`))))
   data <- data %>% mutate(GSD = if_else(!is.na(GSD),GSD ,exp(log(Min/GM)/qnorm(1/`Sample Size`))))
 
-
   #3. WGM and WGSD
-  wgm  <- weighted.mean(data$GM, data[,wt])
-  wgsd <- weighted.mean(data$GSD, data[,wt])
+  wgm  <- weighted.mean(data$GM[complete.cases(data$GSD,data$GM)], data[,wt])
+  wgsd <- weighted.mean(data$GSD[complete.cases(data$GSD,data$GM)], data[,wt])
 
   #4. Generate exposure and concentration curves
   set.seed(12345)
@@ -145,3 +144,10 @@ LEM <- function(df,wt,expf,expunits, n, seed){
 
   return(results)
 }
+
+library('rio')
+library('dplyr')
+data<- import('PFOA Water Example.xlsx')
+
+LEM(data,'Sample Size',5,"ng/L",200,12345)
+wt= 'Sample Size'
