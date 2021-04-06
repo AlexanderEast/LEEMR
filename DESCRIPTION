@@ -2,6 +2,7 @@ Package: LorberEgeghyModel
 Type: Package
 Title: Exposure estimation from concentration data
 Version: 0.1.0
+Date: 2021-04-06
 Authors@R: c(
     person("Alexander", "East", email = "East.Alexander@epa.gov", role = "cre"),
     person("Alexander", "East", email = "East.Alexander@epa.gov", role = "aut"),
