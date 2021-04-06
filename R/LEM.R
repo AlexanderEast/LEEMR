@@ -142,6 +142,3 @@ LEM <- function(df, wt, expf, expunits, n, myseed){
 
   return(results)
 }
-
-
-
