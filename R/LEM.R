@@ -3,7 +3,7 @@
 # Learn more by entering "?LorberEgeghyModel::LEM"
 # into the console or running the line in R.
 
-LEM <- function(df, wt, expf, expunits, n, seed){
+LEM <- function(df, wt, expf, expunits, n, myseed){
 
   #1. Units
   #data<- df
@@ -81,7 +81,7 @@ LEM <- function(df, wt, expf, expunits, n, seed){
                         data[,wt][complete.cases(data$GSD,data$GM)])
 
   #4. Generate exposure and concentration curves
-  set.seed(seed)
+  set.seed(seed = myseed)
   Concentration<- rlnorm(n,wgm,wgsd)
   Exposure     <- rlnorm(n,wgm,wgsd)*expf
 
