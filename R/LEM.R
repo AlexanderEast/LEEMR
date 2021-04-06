@@ -3,8 +3,7 @@
 # Learn more by entering "?LorberEgeghyModel::LEM"
 # into the console or running the line in R.
 
-
-LEM <- function(df,wt,expf,expunits, n, seed){
+LEM <- function(df, wt, expf, expunits, n, seed){
 
   #1. Units
   #data<- df
@@ -76,11 +75,13 @@ LEM <- function(df,wt,expf,expunits, n, seed){
   data <- data %>% mutate(GSD = if_else(!is.na(GSD),GSD ,exp(log(Min/GM)/qnorm(1/`Sample Size`))))
 
   #3. WGM and WGSD
-  wgm  <- weighted.mean(data$GM[complete.cases(data$GSD,data$GM)], data[,wt])
-  wgsd <- weighted.mean(data$GSD[complete.cases(data$GSD,data$GM)], data[,wt])
+  wgm  <- weighted.mean(data$GM[complete.cases(data$GSD,data$GM)],
+                        data[,wt][complete.cases(data$GSD,data$GM)])
+  wgsd <- weighted.mean(data$GSD[complete.cases(data$GSD,data$GM)],
+                        data[,wt][complete.cases(data$GSD,data$GM)])
 
   #4. Generate exposure and concentration curves
-  set.seed(12345)
+  set.seed(seed)
   Concentration<- rlnorm(n,wgm,wgsd)
   Exposure     <- rlnorm(n,wgm,wgsd)*expf
 
@@ -99,8 +100,7 @@ LEM <- function(df,wt,expf,expunits, n, seed){
     sumstats<- signif(sumstats,5)
     return(sumstats)
   }
-
-  summary <- rbind(sumstats(Concentration),sumstats(Exposure))
+  summary <- rbind(sumstats(Concentration$Concentration),sumstats(Exposure$Exposure))
   summary <- cbind(c("Concentration", "Exposure"),summary)
   colnames(summary)[1] <- "Result"
 
@@ -136,12 +136,12 @@ LEM <- function(df,wt,expf,expunits, n, seed){
                               Seed = seed))
 
 
-
-
   #7. Create export list
   results<-list(description,summary,Exposure,Concentration)
   names(results)<- c("Description","Summary Statistics","Exposure","Concentration")
 
   return(results)
 }
+
+
 
