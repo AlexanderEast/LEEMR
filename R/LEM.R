@@ -137,8 +137,8 @@ LEM <- function(df, wt, expf, expunits, n, myseed){
 
 
   #7. Create export list
-  results<-list(description,summary,Exposure,Concentration)
-  names(results)<- c("Description","Summary Statistics","Exposure","Concentration")
+  results<-list(description,summary,Exposure,Concentration,data)
+  names(results)<- c("Description","Summary Statistics","Exposure","Concentration","Data")
 
   return(results)
 }
