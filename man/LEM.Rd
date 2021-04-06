@@ -23,6 +23,17 @@ Concentration output: "ng/m3", "ng/L", or "ng/g"
 
 WGMs and WGSDs are determined by complete cases of both, as visible in the 'Data' dataframe in the output list.
 
+Function output returns five objects:
+
+Description: The time and date of the run, the n number of points, the generated WGM and WGSD, , the colmun used to weight the results, and seed used.
+
+Summary Statistics: the result, mean, min, 10th percentile, median, 75th percentile, 95th percentile, max for concentration and exposure.
+
+Exposure: The generated lognormal exposure curve with "n" number of points.
+
+Concentration: The generated lognormal concentration curve with "n" number of points.
+
+Data: The input data used (df), including estimated summary statistics.
 
 }
 \usage{
