@@ -81,7 +81,7 @@ LEM <- function(df,wt,expf,expunits, n, seed){
   wgsd <- weighted.mean(data$GSD, data[,wt])
 
   #4. Generate exposure and concentration curves
-  set.seed(as.numeric(seed))
+  set.seed(12345)
   Concentration<- rlnorm(n,wgm,wgsd)
   Exposure     <- rlnorm(n,wgm,wgsd)*expf
 
