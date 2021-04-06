@@ -145,9 +145,3 @@ LEM <- function(df,wt,expf,expunits, n, seed){
   return(results)
 }
 
-library('rio')
-library('dplyr')
-data<- import('PFOA Water Example.xlsx')
-
-LEM(data,'Sample Size',5,"ng/L",200,12345)
-wt= 'Sample Size'
