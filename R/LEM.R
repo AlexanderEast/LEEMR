@@ -133,7 +133,7 @@ LEM <- function(df, wt, expf, expunits, n, myseed){
                               WGM = wgm,
                               WGSD= wgsd,
                               Weight = wt,
-                              Seed = seed))
+                              Seed = myseed))
 
 
   #7. Create export list
