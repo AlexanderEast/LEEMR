@@ -4,7 +4,7 @@
 # into the console or running the line in R.
 
 
-LEM <- function(df,wt,expf,expunits, n, seed){
+LEM <- function(df,wt,expf,expunits, n, myseed){
 
   #1. Units
   data<- df
@@ -81,7 +81,7 @@ LEM <- function(df,wt,expf,expunits, n, seed){
   wgsd <- weighted.mean(data$GSD, data[,wt])
 
   #4. Generate exposure and concentration curves
-  set.seed(seed)
+  set.seed(as.numeric(myseed))
   Concentration<- rlnorm(n,wgm,wgsd)
   Exposure     <- rlnorm(n,wgm,wgsd)*expf
 
