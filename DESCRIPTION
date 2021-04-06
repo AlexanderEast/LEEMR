@@ -16,9 +16,9 @@ Description: Lorber-Egeghy Method of exposure analysis, as described in Egeghy &
               Simple intake and pharmacokinetic modeling to characterize exposure of Americans to 
               perfluoroctanoic acid, PFOA(https://pubmed.ncbi.nlm.nih.gov/21517063/)
               
-Imports: 
-         dplyr, 
-         rio
+Depends: 
+         dplyr
+         
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
