@@ -37,7 +37,7 @@ Data: The input data used (df), including estimated summary statistics.
 
 }
 \usage{
-LEM(df,wt,expf,n,seed)
+LEM(df,wt,expf,expunits,n,seed)
 
 In events where only concentration curves are required, please enter the concentration unit and set expf to 1.
 }
