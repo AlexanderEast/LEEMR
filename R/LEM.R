@@ -82,8 +82,8 @@ LEM <- function(df, wt, expf, expunits, n, myseed){
 
   #4. Generate exposure and concentration curves
   set.seed(seed = myseed)
-  Concentration<- rlnorm(n,wgm,wgsd)
-  Exposure     <- rlnorm(n,wgm,wgsd)*expf
+  Concentration<- rlnorm(n,log(wgm),log(wgsd))
+  Exposure     <- Concentration*expf
 
   Concentration <- data.frame(Concentration)
   Concentration$Units <- names(table(data$Units))
