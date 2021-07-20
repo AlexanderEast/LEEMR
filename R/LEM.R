@@ -74,6 +74,10 @@ LEM <- function(df, wt, expf, expunits, n, myseed){
   data <- data %>% mutate(GSD = if_else(!is.na(GSD),GSD ,exp(log(Max/GM)/qnorm(1-1/`Sample Size`))))
   data <- data %>% mutate(GSD = if_else(!is.na(GSD),GSD ,exp(log(Min/GM)/qnorm(1/`Sample Size`))))
 
+  # M. Remove Infs.
+  data$GM[is.infinite(data$GM)]<- NA
+  data$GSD[is.infinite(data$GSD)]<- NA
+
   #3. WGM and WGSD
   wgm  <- weighted.mean(data$GM[complete.cases(data$GSD,data$GM)],
                         data[,wt][complete.cases(data$GSD,data$GM)])
@@ -82,7 +86,7 @@ LEM <- function(df, wt, expf, expunits, n, myseed){
 
   #4. Generate exposure and concentration curves
   set.seed(seed = myseed)
-  Concentration<- rlnorm(n,log(wgm),log(wgsd))
+  Concentration<- rlnorm(n,log(wgm),abs(log(wgsd)))
   Exposure     <- Concentration*expf
 
   Concentration <- data.frame(Concentration)
