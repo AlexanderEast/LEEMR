@@ -6,11 +6,10 @@
 LEM <- function(df, wt, expf, expunits, n, myseed){
 
   #1. Units
-  data<- df
   data<- data %>% dplyr::mutate(UNITFACTOR = case_when(
     (Units %in% c("ng/m³","ng/L","ng/g","µg/kg","ug/kg","pg/mL","pg/ml")) ~ 1,
     (Units %in% c("pg/m³","pg/g")) ~ 0.001,
-    (Units %in% c("ng/mL","ug/l","µg/L","ug/m³","µg/m³")) ~ 1000)) %>%
+    (Units %in% c("ng/mL","ug/l","µg/L","ug/m³","µg/m³","ug/m3")) ~ 1000)) %>%
     mutate_at(c("Min","Max","Median","Mean","SD","GM","GSD","P10","P25","P75","P90","P95","P99"),~.*UNITFACTOR) %>%
     mutate(Units = case_when(
       (Units %in% c("ug/m3","µg/m³","pg/m³","ng/m³")) ~ "ng/m³",
