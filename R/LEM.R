@@ -6,6 +6,7 @@
 LEM <- function(df, wt, expf, expunits, n, myseed){
 
   #1. Units
+  data<- df
   data<- data %>% dplyr::mutate(UNITFACTOR = case_when(
     (Units %in% c("ng/m³","ng/L","ng/g","µg/kg","ug/kg","pg/mL","pg/ml")) ~ 1,
     (Units %in% c("pg/m³","pg/g")) ~ 0.001,
