@@ -5,45 +5,24 @@ library('stringr')
 
 
 rm(list=ls())
-wtcol <- "media"
+wtcol <- "Sample Size"
 x <- import_list("LEP Dev.xlsx")
 data <- x$Data
 factors <- x$Factors
-data_f <- x$`Data Error`
 n <- 2000
 rm(x)
 
 
 
-
 LEM <- function(data,factors,wtcol,n){
-
-# Input Testing
-colnames(data)<- tolower(colnames(data))
-wtcol<-tolower(wtcol)
-
- #1. Detect Weighting Column in Data
-  if (!tolower(wtcol) %in% tolower(colnames(data))){
-    stop((str_c("Column '", wtcol, "' not detected in data column names.")))
-  }
-
- #2. Make sure Weighting Column is a numeric
-if(!is.numeric(data[,(wtcol)])){
-  stop((str_c("Column '", wtcol, "' is not a numeric. Please convert or specify a different column.")))
-}
-
- #3. Detect Factors for all media.
-  if (length(setdiff(unique(data$media), unique(factors$Media))) > 0){
-    stop((str_c("Media '", setdiff(unique(data$media), unique(factors$Media)),
-              "' not detected in factors media column.")))
-}
 
 
 # A. Set seed.
 set.seed(12345)
 # B. Column check. needs columns (Units, weight, Media,)
 
-
+colnames(data)<- tolower(colnames(data))
+wtcol<-tolower(wtcol)
 #1. Units to ng/m3,ng/L, or ng/g.
 data<- data %>% dplyr::mutate(UNITFACTOR = case_when(
     (units %in% c("ng/m3","ng/L","ng/g","µg/kg","ug/kg","pg/mL","pg/ml")) ~ 1,
@@ -221,7 +200,7 @@ thesummary  <- bind_rows(thesummary)
 
 colnames(thesummary)[1:8]<-c("Output","Scenario","Min","10th%","Median","75th%","95th%","Max")
 thesummary$Units <- "ng/day"
-thesummary$WeightedBy <- wtcol
+
 
 colnames(result) <- c("Scenario","Concentration","Exposure")
 
@@ -229,46 +208,12 @@ finished <- list("Summary" = thesummary,
                  "Data"    = data,
                  "Raw"     = result)
 
+export(finished,"LEM_RESULTS.xlsx")
 
-
-namer <- function(name){
-
-  date   <- Sys.time()
-  year   <- substr(date,1,4)
-  month  <- substr(date,6,7)
-  day    <- substr(date,9,10)
-  hour   <- as.numeric(substr(date,12,13))
-  minute <- substr(date,15,16)
-
-  if (hour > 12){
-    hour <- as.character(hour-12)
-    minute <- paste0(minute,"PM")
-  } else {
-    minute <- paste0(minute,"AM")
-  }
-
-  filename <- paste0(name," ",hour,minute," ",month,"",day,"",year)
-
-  return(filename)
-}
-filename  <- str_c(namer('LEM Results'),".xlsx")
-
-
-
-
-export(finished,filename)
-
-cat(str_c("LEM Complete. See Working Directory for ",filename))
+cat("LEM Complete. See Working Directory for LEM_Results.xlsx.")
 }
 
 
+LEM(data,factors,"Sample Size",n)
 
-# Error 1: Media without exposure factors.
-LEM(data_f,factors,"Sample Size",n)
-
-# Error 2: No Weighting Column found.
-LEM(data,factors,"media",n)
-
-# Working Run:
-LEM(data,factors,"Sample size",n)
 

@@ -1,5 +1,5 @@
 \name{Lorber Egeghy Model}
-\alias{LEM}
+\alias{LEM_Concentration}
 \title{Concentration Summary Statistics to Weighted Concentration Curves.}
 \description{
 A function which creates synthetic lognormal data from a dataframe of summary statistic concentration data,a selected weighting column, and n number of points.
