@@ -2,18 +2,18 @@ library('rio')
 library('dplyr')
 library('stringr')
 
-
+### CHECK FOR MEDIA ###
 
 rm(list=ls())
 wtcol <- "sample size"
-x <- import_list("LEP Dev.xlsx")
+x <- import_list("LEP Dev 2.xlsx")
 data <- x$Data
 factors <- x$Factors
 n <- 2000
 rm(x)
 
-
-
+class(data$GSD)
+data$`Sample Size` <-as.numeric(data$`Sample Size`)
 
 LEM <- function(data,factors,wtcol,n){
 
@@ -153,9 +153,9 @@ LEM <- function(data,factors,wtcol,n){
   }
   conc <- lapply(md,distributions)
 
-  # Add names
+  # Add names and remove NAs.
   conc <- bind_rows(conc, .id = "Media Chemical")
-
+  conc <- conc[!is.na(conc$Concentration),]
 
   # 9. Load Exposure Factors
   factors <-split(factors,list(factors$individual,factors$media,factors$path),drop = TRUE)
@@ -204,7 +204,7 @@ LEM <- function(data,factors,wtcol,n){
   # 11. Summarize Exposure Data
   thesummary <- split(result,result$name)
 
-
+bind_rows(md)
   getsummary <- function(x){
 
     Output <- t(c("Exposure", as.character(unique(x$name)), quantile(as.numeric(as.character(x$exp)),c(0,.10,.5,.75,.95,1))))
@@ -320,12 +320,15 @@ LEM <- function(data,factors,wtcol,n){
 
     return(filename)
   }
-  filename  <- str_c(namer('LEM Results'),".xlsx")
+  filename  <- namer('LEM Results')
 
 
-  export(finished,filename)
+  cat(str_c("LEM Complete. See Global Environment for results."))
 
-  cat(str_c("LEM Complete. See Working Directory for ",filename))
+  return(finished)
 }
 
-LEM(data,factors,wtcol,n)
+moe <-LEM(data,factors,wtcol,n)
+
+
+
