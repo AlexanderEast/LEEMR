@@ -6,8 +6,8 @@ library('stringr')
 
 rm(list=ls())
 wtcol <- "sample size"
-x <- import_list("LEP Dev 2.xlsx")
-data <- x$Data
+x <- import_list("LEP Dev 3.xlsx")
+data <- x$Data2
 factors <- x$Factors
 n <- 2000
 rm(x)
@@ -330,5 +330,6 @@ bind_rows(md)
 
 moe <-LEM(data,factors,wtcol,n)
 
-
+exportme <- moe[1:4]
+export(exportme,"results1.xlsx")
 
