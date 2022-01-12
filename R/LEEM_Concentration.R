@@ -1,10 +1,10 @@
-# Lorber Egeghy Model: Concentration only
+# Lorber-Egeghy-East Model: Concentration only
 #
-# Learn more by entering "?LorberEgeghyModel::LEM"
+# Learn more by entering "?LorberEgeghyModel::LEEM_Concentration"
 # into the console or running the line in R.
 
 
-LEM_Concentration <- function(data, wtcol, n){
+LEEM_Concentration <- function(data, wtcol, n){
 
   #1. Units
   data<- data %>% dplyr::mutate(UNITFACTOR = case_when(

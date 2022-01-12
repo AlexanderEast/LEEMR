@@ -2,19 +2,14 @@ library('rio')
 library('dplyr')
 library('stringr')
 
-### CHECK FOR MEDIA ###
-
-rm(list=ls())
-wtcol <- "sample size"
-x <- import_list("LEP Dev 3.xlsx")
-data <- x$Data2
-factors <- x$Factors
-n <- 2000
-rm(x)
+# Lorber-Egeghy-East-Model: Concentration Summary Statistics
+# to Exposure Distributions
+#
+# Learn more by entering "?LorberEgeghyModel::LEEM"
+# into the console or running the line in R.
 
 
-
-LEM <- function(data,factors,wtcol,n,seed = NULL){
+LEEM <- function(data,factors,wtcol,n,seed = NULL){
 
   # 1. Convert all inputs to lowercase and check for column names.
   colnames(data)<- tolower(colnames(data))
@@ -336,7 +331,8 @@ bind_rows(md)
   metadata <- data.frame("Date" = filename,
   "n" = n,
   "Seed" = seed,
-  "Chemicals" = paste(unique(data$chemical),collapse = ", "))
+  "Chemicals" = paste(unique(data$chemical),collapse = ", "),
+  "Media" = paste(unique(data$media),collapse = ", "))
 
   metadata$Chemicals <- as.character(metadata$Chemicals)
   metadata[]<- lapply(metadata, as.character)
@@ -350,13 +346,9 @@ bind_rows(md)
                    "Metadata"  = metadata)
 
 
-  cat(str_c("LEM Complete."))
+  cat(str_c("LEEM-R Complete."))
 
   return(finished)
 }
 
-moe <-LEM(data,factors,wtcol,n)
-
-exportme <- moe[1:4]
-export(exportme,"results1.xlsx")
 

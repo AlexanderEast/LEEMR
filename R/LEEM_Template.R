@@ -1,10 +1,10 @@
 # Lorber Egeghy Model: Template Generator
 #
-# Learn more by entering "?LorberEgeghyModel::LEM_Template"
+# Learn more by entering "?LorberEgeghyModel::LEEM_Template"
 # into the console or running the line in R.
 
 
-LEM_Template<- function(){
+LEEM_Template<- function(){
 
 tnames <- c("Chemical","Weight","Media","Min","Max","Median","Mean","SD",
   "GM","GSD","P10","P25","P75","P90","P95","P99")
@@ -31,8 +31,6 @@ Template<-list("Template" = Template,
                "Factors"  = Factors)
 export(Template,"LEM Template.xlsx")
 
-return(cat("Template Generated. Check your working directory for the LEM_Template.xlsx file."))
+return(cat("Template Generated. Check your working directory for the LEEM_Template.xlsx file."))
 }
 
-
-LEM_Template()
