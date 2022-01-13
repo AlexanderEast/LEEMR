@@ -1,25 +1,24 @@
-Package: LorberEgeghyModel
+Package: LorberEgeghyEastModel R Package (LEEMR)
 Type: Package
-Title: Exposure estimation from concentration data
-Version: 0.1.0
-Date: 2021-04-06
+Title: Exposure estimates from sparse concentration summary statics
+Version: 0.1.1
+Date: 2022-01-13
 Authors@R: c(
     person("Alexander", "East", email = "East.Alexander@epa.gov", role = "cre"),
     person("Alexander", "East", email = "East.Alexander@epa.gov", role = "aut"),
-    person("Sydney", "Brady", role = "aut"),
-    person("Ciara", "Dalton", role = "aut"),
+    person("Sydney", "Brady", role = "ctb"),
+    person("Ciara", "Dalton", role = "ctb"),
+    person("Sarah","Davidson", role = "ctb"),
     person("Peter", "Egeghy", role = "aut"),
     person("Matthew", "Lorber", role = "aut"),
     person("Dan", "Dawson", role = "aut"),
     person("Dan", "Vallero", role = "aut"))
-Description: Lorber-Egeghy Method of exposure analysis, as described in Egeghy & Lorber:
-              "An assessment of the exposure of Americans to perfluorooctane 
-              sulfonate: a comparison of estimated intake with values inferred from 
-              NHANES data"(https://pubmed.ncbi.nlm.nih.gov/20145679/)and Lorber & Egeghy:
-              Simple intake and pharmacokinetic modeling to characterize exposure of Americans to 
-              perfluoroctanoic acid, PFOA(https://pubmed.ncbi.nlm.nih.gov/21517063/)
-              
-Depends: dplyr
+Description: Provides exposure estimates (ng/day) from dataframes of sparse summary statistics of concentration in media. Accepts a dataframe of concentration date where each row is a unique dataset. See "LEEMR_Example_Data" for examples. Contact alexander.w.east@gmail.com with troubleshooting or questions. 
+Depends: 
+    dplyr,
+    R (>= 2.10),
+    rio,
+    stringr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

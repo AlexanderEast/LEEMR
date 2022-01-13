@@ -1,7 +1,3 @@
-library('rio')
-library('dplyr')
-library('stringr')
-
 # Lorber-Egeghy-East-Model: Concentration Summary Statistics
 # to Exposure Distributions
 #
@@ -350,5 +346,6 @@ bind_rows(md)
 
   return(finished)
 }
+
 
 
