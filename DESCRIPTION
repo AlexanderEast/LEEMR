@@ -1,7 +1,7 @@
 Package: LEEMR
 Type: Package
 Title: Exposure estimates from sparse concentration summary statics
-Version: 0.1.1
+Version: 0.1.2
 Date: 2022-01-13
 Authors@R: c(
     person("Alexander", "East", email = "East.Alexander@epa.gov", role = "cre"),
@@ -11,7 +11,7 @@ Authors@R: c(
     person("Sarah","Davidson", role = "ctb"),
     person("Peter", "Egeghy", role = "aut"),
     person("Matthew", "Lorber", role = "aut"),
-    person("Dan", "Dawson", role = "aut"),
+    person("Dan", "Dawson", role = "ctb"),
     person("Dan", "Vallero", role = "aut"))
 Description: Provides exposure estimates (ng/day) from dataframes of sparse summary statistics of concentration in media. Accepts a dataframe of concentration date where each row is a unique dataset. See "LEEMR_Example_Data" for examples. Contact alexander.w.east@gmail.com with troubleshooting or questions. 
 Depends: 

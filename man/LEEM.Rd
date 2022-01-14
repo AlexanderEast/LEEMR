@@ -4,24 +4,25 @@
 \description{
 A function which creates synthetic lognormal data from a dataframe of summary statistic concentration data, exposure factors, a selected weighting column, n number of points.
 
-This model is based on methods described in \href{=https://pubmed.ncbi.nlm.nih.gov/20145679/}{Egeghy & Lorber (2011)} , \href{=https://pubmed.ncbi.nlm.nih.gov/21517063/}{Lorber & Egeghy (2011)} , and \href{=https://www.nature.com/articles/s41370-021-00374-w}{East et al. (2021)}.
+This model is based on methods described in \href{https://pubmed.ncbi.nlm.nih.gov/20145679/}{Egeghy & Lorber (2011)} , \href{https://pubmed.ncbi.nlm.nih.gov/21517063/}{Lorber & Egeghy (2011)} , and \href{https://www.nature.com/articles/s41370-021-00374-w}{East et al. (2021)}.
+
+The series of estimating equations for geometric mean (GM) and
+geometric standard deviation (GSD) is primarily adapted from \href{https://pubmed.ncbi.nlm.nih.gov/25333994/}{Pleil et al. (2014)}.
+
+
+
 
 \describe{
-    \item{Egeghy & Lorber: \url{https://pubmed.ncbi.nlm.nih.gov/20145679/}}
-    \item{Lorber & Egeghy: https://pubmed.ncbi.nlm.nih.gov/21517063/}
-    \item{East et al.    : https://www.nature.com/articles/s41370-021-00374-w}
+    \item{Accepted Units: \emph{ng/m3}, \emph{ug/m3}, \emph{pg/ml}, \emph{ug/L}, \emph{ng/L},\emph{pg/g},\emph{ug/kg}, \emph{ng/g}
+    }
+    \item{ }
+    \item{Concentration output: \emph{ng/m3}, \emph{ng/L}, or \emph{ng/g}}
+    \item{Exposure  output: \emph{ng/day}}
 }
-This model uses a series of estimating equations for geometric mean (GM) and
-geometric standard deviation (GSD) primarily adapted from Pleil et al. (2014).
-
-              Pleil et al.   : https://pubmed.ncbi.nlm.nih.gov/25333994/
-\href{http://rstudio.com}{Rstudio}
-
-Accepted Units: "ng/m3", "ug/m3", "pg/ml", "ug/L", "ng/L", "pg/g", "ug/kg", "ng/g"
 
 
-Concentration output: "ng/m3", "ng/L", or "ng/g"
-Exposure  output: "ng/day"
+
+
 
 
 The function returns a list of dataframes:
@@ -44,12 +45,16 @@ Metadata: Time and date, chemicals, media, n, and seed used in the run.
 LEEM(data,factors,wtcol,n,seed = NULL)
 
 The LEEM is used to generate exposure estimates from sparse summary statistics for any number of chemicals, individuals, and media entered in the input file.
+Note: \code{\link{LEEM_Template}} generates an Excel file template with for \emph{data} and \emph{factors} arguments.
 }
 \arguments{
 
-data = A dataframe containing the following columns: "Chemical", "Media","Units","Sample Size","Min","Max","Median","Mean","SD","GM","GSD","P10","P25","P75","P90","P95","P99." Column names are not case sensitive.
+data = A dataframe containing the following columns: \emph{Chemical}, \emph{Media}, \emph{Units}, \emph{Sample Size}, \emph{Min}, \emph{Max}, \emph{Median}, \emph{Mean}, \emph{SD}, \emph{GM}, \emph{GSD}, \emph{P10}, \emph{P25}, \emph{P75}, \emph{P90}, \emph{P95}, \emph{P99.} Column names are not case sensitive.
 
-factors = A dataframe with exposure factors for each media in the "data" dataframe. Contains the following columns : "Path","Media","Individual","Factor", which are not case sensitive.
+
+factors = A dataframe with exposure factors for each media in the \emph{data} dataframe. Contains the following columns : \emph{Path},\emph{Media},\emph{Individual},\emph{Factor}, which are not case sensitive.
+
+
 
 wtcol = A character input for the name of the 'weighting' column (often 'sample size')
 
@@ -61,7 +66,7 @@ seed = Optional input to ensure or characterize variability between runs. Set by
 }
 
 \examples{
-# Using the Example dataset "LEEMR_Example_Data":
+# Using the Example dataset 'LEEMR_Example_Data':
 
 LEEM(LEEMR_Example_Data$Water,
      LEEMR_Example_Data$`Water Factors`,
