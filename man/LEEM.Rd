@@ -4,17 +4,18 @@
 \description{
 A function which creates synthetic lognormal data from a dataframe of summary statistic concentration data, exposure factors, a selected weighting column, n number of points.
 
-This model is based on methods described in Egeghy & Lorber (2011), Lorber & Egeghy (2011) , and East et al. (2021):
+This model is based on methods described in \href{=https://pubmed.ncbi.nlm.nih.gov/20145679/}{Egeghy & Lorber (2011)} , \href{=https://pubmed.ncbi.nlm.nih.gov/21517063/}{Lorber & Egeghy (2011)} , and \href{=https://www.nature.com/articles/s41370-021-00374-w}{East et al. (2021)}.
 
-              Egeghy & Lorber: https://pubmed.ncbi.nlm.nih.gov/20145679/
-              Lorber & Egeghy: https://pubmed.ncbi.nlm.nih.gov/21517063/
-              East et al.    : https://www.nature.com/articles/s41370-021-00374-w
-
+\describe{
+    \item{Egeghy & Lorber: \url{https://pubmed.ncbi.nlm.nih.gov/20145679/}}
+    \item{Lorber & Egeghy: https://pubmed.ncbi.nlm.nih.gov/21517063/}
+    \item{East et al.    : https://www.nature.com/articles/s41370-021-00374-w}
+}
 This model uses a series of estimating equations for geometric mean (GM) and
 geometric standard deviation (GSD) primarily adapted from Pleil et al. (2014).
 
               Pleil et al.   : https://pubmed.ncbi.nlm.nih.gov/25333994/
-
+\href{http://rstudio.com}{Rstudio}
 
 Accepted Units: "ng/m3", "ug/m3", "pg/ml", "ug/L", "ng/L", "pg/g", "ug/kg", "ng/g"
 
