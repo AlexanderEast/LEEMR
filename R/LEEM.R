@@ -7,12 +7,12 @@
 
 LEEM <- function(data,factors,wtcol,n,seed = NULL){
 
-  # 1. Convert all inputs to lowercase and check for column names.
+  # 1A. Convert all inputs to lowercase and check for column names.
   colnames(data)<- tolower(colnames(data))
   colnames(factors) <-tolower(colnames(factors))
   wtcol<-tolower(wtcol)
 
-  # 1A. Check "data" for column names.
+  # 1B. Check "data" for column names.
   requiredcols <- c("sample size","media","chemical","units",
                     "min","max","median","mean","sd","gm","gsd",
                     "p10","p25","p75","p90","p95","p99")
@@ -22,7 +22,7 @@ LEEM <- function(data,factors,wtcol,n,seed = NULL){
           ". Please rename or add column to data input dataframe."))
   }
 
-  # 1B. Check "factors" for column names.
+  # 1C. Check "factors" for column names.
   requiredcols <- c("path","media","individual","factor")
   if (sum(requiredcols %in% colnames(factors)) != length(requiredcols)){
     mssng <- paste(str_c(setdiff(requiredcols,colnames(factors))), collapse = ", ")
@@ -34,8 +34,7 @@ LEEM <- function(data,factors,wtcol,n,seed = NULL){
   if(is.null(seed)) seed <- 12345
   set.seed(seed)
 
-  # 3. Check Inputs
-
+  # Check Inputs
   # 3A. Detect Weighting Column in Data
   if (!tolower(wtcol) %in% tolower(colnames(data))){
     stop((str_c("Column '", wtcol, "' not detected in data column names.")))
@@ -330,7 +329,6 @@ bind_rows(md)
   "Chemicals" = paste(unique(data$chemical),collapse = ", "),
   "Media" = paste(unique(data$media),collapse = ", "))
 
-  metadata$Chemicals <- as.character(metadata$Chemicals)
   metadata[]<- lapply(metadata, as.character)
 
   # 17. Compile list of results
