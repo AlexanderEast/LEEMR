@@ -16,7 +16,8 @@ geometric standard deviation (GSD) is primarily adapted from \href{https://pubme
     \item{Accepted Units: \emph{ng/m3}, \emph{ug/m3}, \emph{pg/ml}, \emph{ug/L}, \emph{ng/L},\emph{pg/g},\emph{ug/kg}, \emph{ng/g}}
     \item{ }
     \item{Concentration output: \emph{ng/m3}, \emph{ng/L}, or \emph{ng/g}}
-    \item{Exposure  output: \emph{ng/day}}}
+    \item{Exposure  output: \emph{ng/day}}
+}
 
 The function returns a list of dataframes:
 
