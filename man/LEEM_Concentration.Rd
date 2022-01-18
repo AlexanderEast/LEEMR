@@ -13,13 +13,10 @@ geometric standard deviation (GSD) is primarily adapted from \href{https://pubme
 
 
 \describe{
-    \item{Accepted Units: \emph{ng/m3}, \emph{ug/m3}, \emph{pg/ml}, \emph{ug/L}, \emph{ng/L},\emph{pg/g},\emph{ug/kg}, \emph{ng/g}
-    }
+    \item{Accepted Units: \emph{ng/m3}, \emph{ug/m3}, \emph{pg/ml}, \emph{ug/L}, \emph{ng/L},\emph{pg/g},\emph{ug/kg}, \emph{ng/g}}
     \item{ }
     \item{Concentration output: \emph{ng/m3}, \emph{ng/L}, or \emph{ng/g}}
-    \item{Exposure  output: \emph{ng/day}}
-}
-
+    \item{Exposure  output: \emph{ng/day}}}
 
 The function returns a list of dataframes:
 
@@ -35,7 +32,6 @@ Raw: Raw data for plotting.
 
 Metadata: Time and date, chemicals, media, n, and seed used in the run.
 
-
 }
 \usage{
 LEEM_Concentration(data,wtcol,n,seed = NULL)
@@ -43,11 +39,7 @@ LEEM_Concentration(data,wtcol,n,seed = NULL)
 This function is used to summarize concentration data but there are no exposure
 factors or individuals to apply. This is done for PFOA in serum using provided
 example data below but can be applied to other media such as wastewater and effluent.
-Note: \code{\link{LEEM_Template}} generates an Excel file template with for \emph{data} input.
-
-
-
-}
+Note: \code{\link{LEEM_Template}} generates an Excel file template with for \emph{data} input.}
 \arguments{
 
 data = A dataframe containing the following columns: \emph{Chemical}, \emph{Media}, \emph{Units}, \emph{Sample Size}, \emph{Min}, \emph{Max}, \emph{Median}, \emph{Mean}, \emph{SD}, \emph{GM}, \emph{GSD}, \emph{P10}, \emph{P25}, \emph{P75}, \emph{P90}, \emph{P95}, \emph{P99.} Column names are not case sensitive.
