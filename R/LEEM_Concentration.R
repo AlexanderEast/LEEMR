@@ -30,7 +30,7 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
   }
 
 
-  #1. Units
+  #4. Units
   data<- data %>% dplyr::mutate(UNITFACTOR = case_when(
     (units %in% c("ng/m³","ng/L","ng/g","µg/kg","ug/kg","pg/mL","pg/ml")) ~ 1,
     (units %in% c("pg/m³","pg/g")) ~ 0.001,
@@ -42,6 +42,7 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
       (units %in% c("pg/g","µg/kg","ug/kg","ng/g")) ~ "ng/g")) %>%
     select(-UNITFACTOR)
 
+  # 5. GM/GSD estimation sequence
 
   # 5A. Estimate gm using Pleil 1.
   data <- data %>% mutate(gm = if_else(!is.na(gm),gm , median))
@@ -101,27 +102,25 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
   data$gm[is.infinite(data$gm)]<- NA
   data$gsd[is.infinite(data$gsd)]<- NA
 
-  #_________
-
-  #3. Wgm and Wgsd
+  # 6. Wgm and Wgsd
   wgm  <- weighted.mean(data$gm[complete.cases(data$gsd,data$gm)],
                         data[,wtcol][complete.cases(data$gsd,data$gm)])
   wgsd <- weighted.mean(data$gsd[complete.cases(data$gsd,data$gm)],
                         data[,wtcol][complete.cases(data$gsd,data$gm)])
 
-  #4. Generate exposure and concentration curves
+  # 7. Generate exposure and concentration curves
   Concentration<- rlnorm(n,log(wgm),abs(log(wgsd)))
 
   Concentration <- data.frame(Concentration)
   Concentration$Units <- names(table(data$units))
 
 
-  #5. Subset used and not used data
+  # 8. Subset used and not used data
   used     <-  data[complete.cases(data$gsd,data$gm,data[,(wtcol)]),]
   notused  <-  data[!complete.cases(data$gsd,data$gm,data[,(wtcol)]),]
 
 
-  #5. Summarize output
+  # 9. Summarize output
   sumstats<- function(x){
     sumstats <- t(quantile(x,c(0,.10,.5,.75,.95,1)))
     mymean   <- mean(x)
@@ -138,7 +137,8 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
 
 scount <- data.frame(t(table(used$chemical)))[2:3]
 colnames(scount)<- c("Chemical","Stuides Used")
-  #7. Create Metadata
+
+  # 10. Create Metadata
   namer <- function(name){
 
     date   <- Sys.time()
@@ -169,7 +169,7 @@ colnames(scount)<- c("Chemical","Stuides Used")
 
   metadata[]<- lapply(metadata, as.character)
 
-  # 17. Compile list of results
+  # 11. Compile list of results
   finished <- list("Summary"   = summary,
                    "Data"      = used,
                    "Not Used"  = notused,
@@ -181,5 +181,3 @@ colnames(scount)<- c("Chemical","Stuides Used")
   cat(str_c("LEEM-R Concentration for one media complete."))
   return(finished)
 }
-
-LEEM_Concentration(LEEMR_Example_Data$Serum,'sample size',1000)
