@@ -2,7 +2,7 @@
 \alias{LEEM}
 \title{Concentration Summary Statistics to Weighted Concentration & Exposure Estimates.}
 \description{
-A function which creates synthetic lognormal data from a dataframe of summary statistic concentration data, exposure factors, a selected weighting column, n number of points.
+A function which creates synthetic lognormal exposure data from a dataframe of summary statistic concentration data, exposure factors, a selected weighting column, n number of points.
 
 This model is based on methods described in \href{https://pubmed.ncbi.nlm.nih.gov/20145679/}{Egeghy & Lorber (2011)} , \href{https://pubmed.ncbi.nlm.nih.gov/21517063/}{Lorber & Egeghy (2011)} , and \href{https://www.nature.com/articles/s41370-021-00374-w}{East et al. (2021)}.
 
@@ -44,16 +44,16 @@ Metadata: Time and date, chemicals, media, n, and seed used in the run.
 \usage{
 LEEM(data,factors,wtcol,n,seed = NULL)
 
-The LEEM is used to generate exposure estimates from sparse summary statistics for any number of chemicals, individuals, and media entered in the input file.
+The LEEM is used to generate exposure estimates from sparse summary statistics
+for any number of chemicals, individuals, and media entered in the input file.
 Note: \code{\link{LEEM_Template}} generates an Excel file template with for \emph{data} and \emph{factors} arguments.
 }
 \arguments{
 
-data = A dataframe containing the following columns: \emph{Chemical}, \emph{Media}, \emph{Units}, \emph{Sample Size}, \emph{Min}, \emph{Max}, \emph{Median}, \emph{Mean}, \emph{SD}, \emph{GM}, \emph{GSD}, \emph{P10}, \emph{P25}, \emph{P75}, \emph{P90}, \emph{P95}, \emph{P99.} Column names are not case sensitive.
+data = A dataframe containing the following columns: \emph{Chemical}, \emph{Media}, \emph{Units}, \emph{Sample Size}, \emph{Min}, \emph{Max}, \emph{Median}, \emph{Mean}, \emph{SD}, \emph{GM}, \emph{GSD}, \emph{P10}, \emph{P25},  \emph{P75}, \emph{P90}, \emph{P95}, \emph{P99.} Column names are not case sensitive.
 
 
 factors = A dataframe with exposure factors for each media in the \emph{data} dataframe. Contains the following columns : \emph{Path},\emph{Media},\emph{Individual},\emph{Factor}, which are not case sensitive.
-
 
 
 wtcol = A character input for the name of the 'weighting' column (often 'sample size')
@@ -67,6 +67,10 @@ seed = Optional input to ensure or characterize variability between runs. Set by
 
 \examples{
 # Using the Example dataset 'LEEMR_Example_Data':
+# Using the Example factors in 'LEEMR_ExampleData""
+# Specifying the column "sample size" to weight datasets
+# setting n = 1000
+# No argument provided for 'seed', defaulting to "12345"
 
 LEEM(LEEMR_Example_Data$Water,
      LEEMR_Example_Data$`Water Factors`,

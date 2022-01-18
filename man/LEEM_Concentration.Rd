@@ -2,25 +2,23 @@
 \alias{LEEM_Concentration}
 \title{Concentration Summary Statistics to Weighted Concentration Estimates.}
 \description{
-A function which creates synthetic lognormal data from a dataframe of summary statistic concentration data, a selected weighting column, n number of points.
+A function which creates synthetic lognormal data from a dataframe of summary statistic concentration data, exposure factors, a selected weighting column, n number of points.
 
-This model is based on methods described in Egeghy & Lorber (2011), Lorber & Egeghy (2011) , and East et al. (2021):
+This model is based on methods described in \href{https://pubmed.ncbi.nlm.nih.gov/20145679/}{Egeghy & Lorber (2011)} , \href{https://pubmed.ncbi.nlm.nih.gov/21517063/}{Lorber & Egeghy (2011)} , and \href{https://www.nature.com/articles/s41370-021-00374-w}{East et al. (2021)}.
 
-              Egeghy & Lorber: https://pubmed.ncbi.nlm.nih.gov/20145679/
-              Lorber & Egeghy: https://pubmed.ncbi.nlm.nih.gov/21517063/
-              East et al.    : https://www.nature.com/articles/s41370-021-00374-w
-
-This model uses a series of estimating equations for geometric mean (GM) and
-geometric standard deviation (GSD) primarily adapted from Pleil et al. (2014).
-
-              Pleil et al.   : https://pubmed.ncbi.nlm.nih.gov/25333994/
+The series of estimating equations for geometric mean (GM) and
+geometric standard deviation (GSD) is primarily adapted from \href{https://pubmed.ncbi.nlm.nih.gov/25333994/}{Pleil et al. (2014)}.
 
 
-Accepted Units: "ng/m3", "ug/m3", "pg/ml", "ug/L", "ng/L", "pg/g", "ug/kg", "ng/g"
 
 
-Concentration output: "ng/m3", "ng/L", or "ng/g"
-Exposure  output: "ng/day"
+\describe{
+    \item{Accepted Units: \emph{ng/m3}, \emph{ug/m3}, \emph{pg/ml}, \emph{ug/L}, \emph{ng/L},\emph{pg/g},\emph{ug/kg}, \emph{ng/g}
+    }
+    \item{ }
+    \item{Concentration output: \emph{ng/m3}, \emph{ng/L}, or \emph{ng/g}}
+    \item{Exposure  output: \emph{ng/day}}
+}
 
 
 The function returns a list of dataframes:
@@ -42,11 +40,18 @@ Metadata: Time and date, chemicals, media, n, and seed used in the run.
 \usage{
 LEEM_Concentration(data,wtcol,n,seed = NULL)
 
-This function is used when concentration data is to be summarized but there are no exposure factors or individuals to apply. This is done for PFOA in serum in the example below but can be applied to other media such as wastewater and effluent.
+This function is used to summarize concentration data but there are no exposure
+factors or individuals to apply. This is done for PFOA in serum using provided
+example data below but can be applied to other media such as wastewater and effluent.
+Note: \code{\link{LEEM_Template}} generates an Excel file template with for \emph{data} input.
+
+
+
 }
 \arguments{
 
-data = A dataframe containing the following columns: "Chemical", "Media","Units","Sample Size","Min","Max","Median","Mean","SD","GM","GSD","P10","P25","P75","P90","P95","P99." Column names are not case sensitive.
+data = A dataframe containing the following columns: \emph{Chemical}, \emph{Media}, \emph{Units}, \emph{Sample Size}, \emph{Min}, \emph{Max}, \emph{Median}, \emph{Mean}, \emph{SD}, \emph{GM}, \emph{GSD}, \emph{P10}, \emph{P25}, \emph{P75}, \emph{P90}, \emph{P95}, \emph{P99.} Column names are not case sensitive.
+
 
 wtcol = A character input for the name of the 'weighting' column (often 'sample size')
 
@@ -60,8 +65,8 @@ seed = Optional input to ensure or characterize variability between runs. Set by
 \examples{
 # Using the Example dataset "LEEMR_Example_Data":
 
-LEEM(LEEMR_Example_Data$Serum,
-     "sample size",
-     1000)
+LEEM_Concentration(LEEMR_Example_Data$Serum,
+                   "sample size",
+                   1000)
 }
 
