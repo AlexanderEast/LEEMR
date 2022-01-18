@@ -64,6 +64,9 @@ seed = Optional input to ensure or characterize variability between runs. Set by
 
 \examples{
 # Using the Example dataset "LEEMR_Example_Data":
+# Specifying the column "sample size" to weight datasets
+# setting n = 1000
+# No argument provided for 'seed', defaulting to "12345"
 
 LEEM_Concentration(LEEMR_Example_Data$Serum,
                    "sample size",
