@@ -1,6 +1,6 @@
-\name{Lorber-Egeghy-East Model R Package}
-\alias{Package description}
-\title{Exposure and Concentration Estimates from sparse summary statistic data}
+\name{Lorber-Egeghy-East Model R Package Description}
+\alias{LEEMR}
+\title{Package Description}
 \description{
 
 TheLorber-Egeghy-East Model R Package (LEEMR) was developed to estimate daily exposure to Per- and Polyfluoroalkyl Substances (PFAS) (\href{https://pubmed.ncbi.nlm.nih.gov/20145679/}{Egeghy & Lorber (2011)}, \href{https://pubmed.ncbi.nlm.nih.gov/21517063/}{Lorber & Egeghy (2011)}, \href{https://www.nature.com/articles/s41370-021-00374-w}{East et al. (2021)}). The model has since been expanded to work across chemical, media, and any number of exposure factors. The deterministic model generates lognormal points from an entered collection of summmary statistics originating from unique datasets. As such, this model is useful for quickly interpreting large volumes of data for exposure and concentration estimates.
