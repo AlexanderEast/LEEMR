@@ -178,6 +178,6 @@ colnames(scount)<- c("Chemical","Stuides Used")
                    "Metadata"  = metadata)
 
 
-  cat(str_c("LEEM-R Concentration for one media complete."))
+  cat(str_c("LEEM-R Concentration complete."))
   return(finished)
 }
