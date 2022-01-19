@@ -1,6 +1,6 @@
 \name{Lorber-Egeghy-East Model (LEEM)}
 \alias{LEEM}
-\title{Concentration Summary Statistics to Weighted Concentration & Exposure Estimates.}
+\title{Concentration Summary Statistics to Weighted Concentration & Exposure Estimates}
 \description{
 A function which creates synthetic lognormal exposure data from a dataframe of summary statistic concentration data, exposure factors, a selected weighting column, n number of points.
 
