@@ -345,5 +345,3 @@ bind_rows(md)
   return(finished)
 }
 
-
-
