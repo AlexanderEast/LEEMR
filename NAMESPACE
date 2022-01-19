@@ -1,5 +1,5 @@
 exportPattern("^[[:alpha:]]+")
 importFrom(magrittr,"%>%")
-import(dplyr::select)
-import(rio::export)
+import(dplyr)
+import(rio)
 import(stringr)
