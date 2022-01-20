@@ -25,7 +25,7 @@ Summary: Mean, min, 10th percentile, median, 75th percentile, 95th percentile, a
 
 Data: The input data for which GM and GSDs could be estimated.
 
-Not Used: The input data for which GM and GSDS could not be estimated.
+Not Used: The input data for which GM and GSDs could not be estimated.
 
 Used Row Count: Counts of used datasets by chemical and media.
 
@@ -57,10 +57,10 @@ seed = Optional input to ensure or characterize variability between runs. Set by
 
 \examples{
 # Using the Example dataset 'LEEMR_Example_Data':
-# Sheets  "Water" and "Water Factors" called respectively
-# Specifying the column "sample size" to weight datasets
+# sheets  "Water" and "Water Factors" called respectively
+# specifying the column "sample size" to weight datasets
 # setting n = 1000
-# No argument provided for 'seed', defaulting to "12345"
+# no argument provided for 'seed', defaulting to "12345"
 
 LEEM(LEEMR_Example_Data$Water,
      LEEMR_Example_Data$`Water Factors`,

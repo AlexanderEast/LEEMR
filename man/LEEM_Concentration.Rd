@@ -25,7 +25,7 @@ Summary: Mean, min, 10th percentile, median, 75th percentile, 95th percentile, a
 
 Data: The input data for which GM and GSDs could be estimated.
 
-Not Used: The input data for which GM and GSDS could not be estimated.
+Not Used: The input data for which GM and GSDs could not be estimated.
 
 Used Row Count: Counts of used datasets by chemical and media.
 
