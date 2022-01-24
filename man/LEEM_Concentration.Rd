@@ -35,7 +35,7 @@ Metadata: Time and date, chemicals, media, n, and seed used in the run.
 
 }
 \usage{
-LEEM_Concentration(data,wtcol,n,seed = NULL)
+LEEM_Concentration(data, wtcol, n, seed = NULL)
 
 This function is used to summarize concentration data but there are no exposure
 factors or individuals to apply. This is done for PFOA in serum using provided

@@ -125,7 +125,7 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
     sumstats <- t(quantile(x,c(0,.10,.5,.75,.95,1)))
     mymean   <- mean(x)
     sumstats <- cbind(mymean,sumstats)
-    colnames(sumstats)<-c("Mean","Min","10th%","Median","75th%","95th","Max")
+    colnames(sumstats)<-c("Mean","Min","10th%","Median","75th%","95th%","Max")
     sumstats<- signif(sumstats,5)
     return(sumstats)
   }

@@ -36,7 +36,7 @@ Metadata: Time and date, chemicals, media, n, and seed used in the run.
 
 }
 \usage{
-LEEM(data,factors,wtcol,n,seed = NULL)
+LEEM(data, factors, wtcol, n, seed = NULL)
 
 The LEEM is used to generate exposure estimates from sparse summary statistics
 for any number of chemicals, individuals, and media entered in the input file.
