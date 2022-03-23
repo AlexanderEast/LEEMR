@@ -3,6 +3,16 @@
 # Learn more by entering "?LorberEgeghyModel::LEEM_Concentration"
 # into the console or running the line in R.
 
+rm(list=ls())
+library(dplyr)
+library(stringr)
+library(rio)
+
+data<- load("./data/LEEMR_Example_Data.rda")
+data<- LEEMR_Example_Data$Water
+data$Units[2]<-"ng/m3"
+data$Media[1:3]<-rep("Dust",3)
+
 LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
 
   # Testing
@@ -19,6 +29,14 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
     stop(str_c("Missing data input column name(s): ",mssng ,
                ". Please rename or add column to data input dataframe."))
   }
+
+  #1C. Make sure one media entered.
+  if (length(unique(data$media)) > 1){
+    stop(str_c("Only one media allowed at a time in LEEM_Concentration. The following media are listed in the input dataframe: ",
+               paste(unique(data$media),collapse = ", "),"."))
+  }
+
+
 
   # 2. Set seed if none specified.
   if(is.null(seed)) seed <- 12345
@@ -41,6 +59,12 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
       (units %in% c("ng/mL","ug/l","ug/L","µg/l","µg/L","pg/ml","pg/mL","ng/L")) ~ "ng/L",
       (units %in% c("pg/g","µg/kg","ug/kg","ng/g")) ~ "ng/g")) %>%
     select(-UNITFACTOR)
+
+  #4A. Units test.
+  if (length(unique(data$units)) > 1){
+    stop(str_c("Different unit metrics for media. ",unique(data$media)," units are: ",
+               paste(unique(data$units),collapse = ", "),". Please resolve to one metric unit in input."))
+  }
 
   # 5. GM/GSD estimation sequence
 
@@ -181,3 +205,7 @@ colnames(scount)<- c("Chemical","Stuides Used")
   cat(str_c("LEEM-R Concentration complete."))
   return(finished)
 }
+
+
+
+
