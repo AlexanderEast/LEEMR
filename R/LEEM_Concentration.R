@@ -41,11 +41,11 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
   #4. Units
   data<- data %>% dplyr::mutate(UNITFACTOR = case_when(
     (units %in% c("ng/m³","ng/L","ng/g","µg/kg","ug/kg","pg/mL","pg/ml","ng/m3")) ~ 1,
-    (units %in% c("pg/m³","pg/g")) ~ 0.001,
-    (units %in% c("ng/mL","ug/l","µg/L","ug/m³","µg/m³","ug/m3")) ~ 1000)) %>%
+    (units %in% c("pg/m³","pg/g","pg/m3")) ~ 0.001,
+    (units %in% c("ng/mL","ug/l","µg/L","ug/m³","µg/m³","ug/m3","µg/m3")) ~ 1000)) %>%
     mutate_at(c("min","max","median","mean","sd","gm","gsd","p10","p25","p75","p90","p95","p99"),~.*UNITFACTOR) %>%
     mutate(units = case_when(
-      (units %in% c("ug/m3","µg/m³","pg/m³","ng/m³","ng/m3")) ~ "ng/m3",
+      (units %in% c("ug/m3","µg/m³","pg/m³","ng/m³","ng/m3","pg/m3")) ~ "ng/m3",
       (units %in% c("ng/mL","ug/l","ug/L","µg/l","µg/L","pg/ml","pg/mL","ng/L")) ~ "ng/L",
       (units %in% c("pg/g","µg/kg","ug/kg","ng/g")) ~ "ng/g")) %>%
     select(-UNITFACTOR)
