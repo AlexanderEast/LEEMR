@@ -23,11 +23,13 @@ The function returns a list of dataframes:
 
 Summary: Mean, min, 10th percentile, median, 75th percentile, 95th percentile, and max for concentration and exposure across each media, pathway, and chemical entered.
 
-Data: The input data for which GM and GSDs could be estimated.
+Used Input: The input data for which GM and GSDs could be estimated.
 
-Not Used: The input data for which GM and GSDs could not be estimated.
+Excluded Input: The input data for which GM and GSDs could not be estimated.
 
-Used Row Count: Counts of used datasets by chemical and media.
+Used Dataset Counts: Counts of used datasets by chemical and media.
+
+Absorption Fractions: The Absorption fractions used.
 
 Raw: Raw data for plotting.
 
@@ -36,16 +38,18 @@ Metadata: Time and date, chemicals, media, n, and seed used in the run.
 
 }
 \usage{
-LEEM(data, factors, wtcol, n, seed = NULL)
+LEEM(data, factors, absorption = NULL, wtcol, n, seed = NULL)
 
 The LEEM is used to generate exposure estimates from sparse summary statistics
-for any number of chemicals, individuals, and media entered in the input file.
+for any number of chemicals, individuals, and media entered.
 Note: \code{\link{LEEM_Template}} generates an Excel file template with for \emph{data} and \emph{factors} arguments.}
 
 \arguments{
 data = A dataframe containing the following columns: \emph{Chemical}, \emph{Media}, \emph{Units}, \emph{Sample Size}, \emph{Min}, \emph{Max}, \emph{Median}, \emph{Mean}, \emph{SD}, \emph{GM}, \emph{GSD}, \emph{P10}, \emph{P25},  \emph{P75}, \emph{P90}, \emph{P95}, \emph{P99.} Column names are not case sensitive.
 
-factors = A dataframe with exposure factors for each media in the \emph{data} dataframe. Contains the following columns : \emph{Path},\emph{Media},\emph{Individual},\emph{Factor}, which are not case sensitive.
+factors = A dataframe with exposure factors for each media and chemical in the \emph{data} dataframe. Contains the following columns : \emph{Chemical}, \emph{Path}, \emph{Media}, and \emph{Absorption}, which are not case sensitive. A dataframe will be auto-generated if not entered.
+
+absorption = A dataframe with absorption fractionsfor each media in the \emph{data} dataframe. Contains the following columns : \emph{Path}, \emph{Media}, \emph{Individual}, and \emph{Factor}, which are not case sensitive.
 
 wtcol = A character input for the name of the 'weighting' column (often 'sample size').
 
@@ -64,6 +68,7 @@ seed = Optional input to ensure or characterize variability between runs. Set by
 
 LEEM(LEEMR_Example_Data$Water,
      LEEMR_Example_Data$`Water Factors`,
+     LEEMR_Example_Data$`Water Absorption`,
      "sample size",
      1000)
 }
