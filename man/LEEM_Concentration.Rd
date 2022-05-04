@@ -2,7 +2,7 @@
 \alias{LEEM_Concentration}
 \title{Concentration Summary Statistics to Weighted Concentration Estimates}
 \description{
-A function which creates synthetic lognormal data from a dataframe of summary statistic concentration data, exposure factors, a selected weighting column, and \emph{n} number of points for a single media.
+A function which creates synthetic lognormal data from a dataframe of summary statistic concentration data, exposure factors, a selected weighting column, and \emph{n} number of points for a single media and single chemical.
 
 This model is based on methods described in \href{https://pubmed.ncbi.nlm.nih.gov/20145679/}{Egeghy & Lorber (2011)} , \href{https://pubmed.ncbi.nlm.nih.gov/21517063/}{Lorber & Egeghy (2011)} , and \href{https://www.nature.com/articles/s41370-021-00374-w}{East et al. (2021)}.
 
@@ -13,21 +13,20 @@ geometric standard deviation (GSD) is primarily adapted from \href{https://pubme
 
 
 \describe{
-    \item{Accepted Units: \emph{ng/m3}, \emph{ug/m3}, \emph{pg/ml}, \emph{ug/L}, \emph{ng/L},\emph{pg/g},\emph{ug/kg}, \emph{ng/g}}
+    \item{Accepted Units: \emph{ng/m3}, \emph{ug/m3}, \emph{pg/ml}, \emph{ng/mL}, \emph{ug/L}, \emph{ng/L}, \emph{pg/g}, \emph{ug/kg}, \emph{ng/g}}
     \item{ }
     \item{Concentration output: \emph{ng/m3}, \emph{ng/L}, or \emph{ng/g}}
-    \item{Exposure  output: \emph{ng/day}}
    }
 
 The function returns a list of dataframes:
 
-Summary: Mean, min, 10th percentile, median, 75th percentile, 95th percentile, and max for concentration.
+Summary: mean, min, 10th percentile, median, 75th percentile, 95th percentile, and max for concentration and exposure across each media, pathway, and chemical entered.
 
-Data: The input data for which GM and GSDs could be estimated.
+Used Input: The input data for which GM and GSDs could be estimated.
 
-Not Used: The input data for which GM and GSDs could not be estimated.
+Excluded Input: The input data for which GM and GSDs could not be estimated.
 
-Used Row Count: Counts of used datasets by chemical and media.
+Used Dataset Counts: Counts of used datasets by chemical and media.
 
 Raw: Raw data for plotting.
 
@@ -37,10 +36,10 @@ Metadata: Time and date, chemicals, media, n, and seed used in the run.
 \usage{
 LEEM_Concentration(data, wtcol, n, seed = NULL)
 
-This function is used to summarize concentration data but there are no exposure
-factors or individuals to apply. This is done for PFOA in serum using provided
-example data below but can be applied to other media such as wastewater and effluent.
-Note: \code{\link{LEEM_Template}} generates an Excel file template with for \emph{data} input.}
+This function is used to summarize lognormally distributed concentration data in similar media.
+An example using PFOA in serum is provided in the \emph{Examples} section below.
+}
+
 \arguments{
 
 data = A dataframe of one media containing the following columns: \emph{Chemical}, \emph{Media}, \emph{Units}, \emph{Sample Size}, \emph{Min}, \emph{Max}, \emph{Median}, \emph{Mean}, \emph{SD}, \emph{GM}, \emph{GSD}, \emph{P10}, \emph{P25}, \emph{P75}, \emph{P90}, \emph{P95}, \emph{P99.} Column names are not case sensitive.

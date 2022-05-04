@@ -3,11 +3,12 @@
 # Learn more by entering "?LorberEgeghyModel::LEEM_Template"
 # into the console or running the line in R.
 
-
 LEEM_Template<- function(){
 
 tnames <- c("Chemical","Weight","Media","Min","Max","Median","Mean","SD",
   "GM","GSD","P10","P25","P75","P90","P95","P99")
+fnames<- c("Individual","Media","Path","Factor","Value")
+anames <- c("Chemical","Media","Path","Absorption")
 
 Template <- data.frame(cbind(
 matrix("A string",nrow = 3, ncol = 1),
@@ -15,22 +16,28 @@ matrix("A numeric",nrow = 3, ncol = 1),
 c("String here must be detected in Factors sheet. Examples Below.","Dust","Water"),
 matrix("A numeric",nrow = 3, ncol = length(tnames)-3)))
 
-
-fnames<- c("Individual","Media","Path","Factor","Value")
-
 Factors <- data.frame(t(c("Name of group (adults, women, children, etc.)","Media column to match data input sheet (e.g. Dust)",
                           "Grouping of factors (e.g. Ingestion)","Name of one of many variables used to transform concentration to a result. (e.g. Inhalation Rate)",
                           "A numeric")))
 
-colnames(Template)<- tnames
-colnames(Factors)<-fnames
 
-Template$Other <- "Add any number of identifying columns. (citation, location, etc.). These will be carried to results."
+Absorption <- data.frame(t(c("Chemical Name","Media column to match data input sheet (e.g. Dust)","Pathway concurrent with factors sheet",
+                             "The absorption fraction for this chemical/media/pathway.")))
 
-Template<-list("Template" = Template,
-               "Factors"  = Factors)
-export(Template,"LEM Template.xlsx")
+colnames(Template)   <- tnames
+colnames(Factors)    <-fnames
+colnames(Absorption) <- anames
 
-return(cat("Template Generated. Check your working directory for the LEEM_Template.xlsx file."))
+Template$Other   <- "Add any number of identifying columns. (citation, location, etc.). These will be carried to results."
+Factors$Other    <- "Add any number of columns (citation, notes, etc.)."
+Absorption$Other <- "Add any number of columns (citation, notes, etc.)."
+
+Template<-list("Data Template"   = Template,
+               "Factors"    = Factors,
+               "Absorption" = Absorption)
+
+cat("LEEM-R Template Generated.")
+return(Template)
 }
+
 

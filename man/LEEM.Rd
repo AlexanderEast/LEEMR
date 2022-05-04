@@ -13,7 +13,7 @@ geometric standard deviation (GSD) is primarily adapted from \href{https://pubme
 
 
 \describe{
-    \item{Accepted Units: \emph{ng/m3}, \emph{ug/m3}, \emph{pg/ml}, \emph{ug/L}, \emph{ng/L},\emph{pg/g},\emph{ug/kg}, \emph{ng/g}}
+    \item{Accepted Units: \emph{ng/m3}, \emph{ug/m3}, \emph{pg/ml}, \emph{ng/mL}, \emph{ug/L}, \emph{ng/L},\emph{pg/g},\emph{ug/kg}, \emph{ng/g}}
     \item{ }
     \item{Concentration output: \emph{ng/m3}, \emph{ng/L}, or \emph{ng/g}}
     \item{Exposure  output: \emph{ng/day}}
@@ -66,9 +66,11 @@ seed = Optional input to ensure or characterize variability between runs. Set by
 # setting n = 1000
 # no argument provided for 'seed', defaulting to "12345"
 
-LEEM(LEEMR_Example_Data$Water,
-     LEEMR_Example_Data$`Water Factors`,
-     LEEMR_Example_Data$`Water Absorption`,
-     "sample size",
-     1000)
+LEEM(
+  LEEMR_Example_Data$Water,
+  LEEMR_Example_Data$`Water Factors`,
+  LEEMR_Example_Data$`Water Absorption`,
+     'sample size',
+     1000,
+     123)
 }

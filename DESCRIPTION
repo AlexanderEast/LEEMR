@@ -1,8 +1,8 @@
 Package: LEEMR
 Type: Package
 Title: Exposure estimates from sparse concentration summary statics
-Version: 0.1.4
-Date: 2022-03-23
+Version: 0.1.5
+Date: 2022-04-25
 Authors@R: c(
     person("Alexander", "East", email = "East.Alexander@epa.gov", role = "cre"),
     person("Alexander", "East", email = "East.Alexander@epa.gov", role = "aut"),

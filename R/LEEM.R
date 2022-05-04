@@ -4,14 +4,12 @@
 # Learn more by entering "?LorberEgeghyModel::LEEM"
 # into the console or running the line in R.
 
-
 LEEM <- function(data,factors,absorption = NULL,wtcol,n,seed = NULL){
 
   # 1. Convert all inputs to lowercase
   colnames(data)<- tolower(colnames(data))
   colnames(factors) <-tolower(colnames(factors))
   wtcol<-tolower(wtcol)
-
   # function which converts entire dataframe to lowercase
   units <- data$units
 
@@ -91,9 +89,7 @@ LEEM <- function(data,factors,absorption = NULL,wtcol,n,seed = NULL){
   inabs    <- absorption[c("chemical","media","path")]
   colnames(possible) <- c("chemical","media","path")
 
-  inabs
-
-  if (nrow(setdiff(possible,inabs)) > 1){
+  if (nrow(setdiff(possible,inabs)) >= 1){
     warning("Some absorption fractions not provided and a value of 1 will be used.
            See output for missing fractions.")
 
@@ -117,11 +113,11 @@ LEEM <- function(data,factors,absorption = NULL,wtcol,n,seed = NULL){
   data<- data %>% dplyr::mutate(UNITFACTOR = case_when(
     (units %in% c("ng/m³","ng/L","ng/g","µg/kg","ug/kg","pg/mL","pg/ml","ng/m3")) ~ 1,
     (units %in% c("pg/m³","pg/g","pg/m3")) ~ 0.001,
-    (units %in% c("ng/mL","ug/l","µg/L","ug/m³","µg/m³","ug/m3","µg/m3")) ~ 1000)) %>%
+    (units %in% c("ng/ml","ng/mL","ug/l","µg/L","ug/m³","µg/m³","ug/m3","µg/m3")) ~ 1000)) %>%
     mutate_at(c("min","max","median","mean","sd","gm","gsd","p10","p25","p75","p90","p95","p99"),~.*UNITFACTOR) %>%
     mutate(units = case_when(
       (units %in% c("ug/m3","µg/m³","pg/m³","ng/m³","ng/m3","pg/m3")) ~ "ng/m3",
-      (units %in% c("ng/mL","ug/l","ug/L","µg/l","µg/L","pg/ml","pg/mL","ng/L")) ~ "ng/L",
+      (units %in% c("ng/ml","ng/mL","ug/l","ug/L","µg/l","µg/L","pg/ml","pg/mL","ng/L")) ~ "ng/L",
       (units %in% c("pg/g","µg/kg","ug/kg","ng/g")) ~ "ng/g")) %>%
     select(-UNITFACTOR)
 
@@ -238,7 +234,6 @@ LEEM <- function(data,factors,absorption = NULL,wtcol,n,seed = NULL){
 
   md<-lapply(md,wgmwgsd)
 
-
   # 8. Create concentration curves.
   distributions <- function(x){
     set.seed(seed)
@@ -270,10 +265,6 @@ LEEM <- function(data,factors,absorption = NULL,wtcol,n,seed = NULL){
 
   factors<-lapply(factors,exposurefactors)
 
-  factors
-
-
-
   # 10. Apply Exposure Factors
   conc2exposure <- function(x){
     # Match Media across factors and concentration
@@ -302,8 +293,9 @@ LEEM <- function(data,factors,absorption = NULL,wtcol,n,seed = NULL){
 
   absorption$group <- str_c(absorption$media," ",absorption$path," ",absorption$chemical)
 
-  # merge and multiply
-  result <- merge(result,absorption,by.y="group", all.y = FALSE)
+
+# merge and multiply
+  result <- merge(result,absorption,by ="group")
   result$exp<-as.numeric(result$exp)*as.numeric(result$absorption)
   result$conc <- as.numeric(result$conc)
 

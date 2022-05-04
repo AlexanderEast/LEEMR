@@ -26,7 +26,11 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
                paste(unique(data$media),collapse = ", "),"."))
   }
 
-
+  #1D. Make sure one chemical is entered.
+  if (length(unique(data$chemical)) > 1){
+    stop(str_c("Only one chemical allowed at a time in LEEM_Concentration. The following are listed in the input dataframe: ",
+               paste(unique(data$chemical),collapse = ", "),"."))
+  }
 
   # 2. Set seed if none specified.
   if(is.null(seed)) seed <- 12345
@@ -42,17 +46,17 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
   data<- data %>% dplyr::mutate(UNITFACTOR = case_when(
     (units %in% c("ng/m³","ng/L","ng/g","µg/kg","ug/kg","pg/mL","pg/ml","ng/m3")) ~ 1,
     (units %in% c("pg/m³","pg/g","pg/m3")) ~ 0.001,
-    (units %in% c("ng/mL","ug/l","µg/L","ug/m³","µg/m³","ug/m3","µg/m3")) ~ 1000)) %>%
+    (units %in% c("ng/ml","ng/mL","ug/l","µg/L","ug/m³","µg/m³","ug/m3","µg/m3")) ~ 1000)) %>%
     mutate_at(c("min","max","median","mean","sd","gm","gsd","p10","p25","p75","p90","p95","p99"),~.*UNITFACTOR) %>%
     mutate(units = case_when(
       (units %in% c("ug/m3","µg/m³","pg/m³","ng/m³","ng/m3","pg/m3")) ~ "ng/m3",
-      (units %in% c("ng/mL","ug/l","ug/L","µg/l","µg/L","pg/ml","pg/mL","ng/L")) ~ "ng/L",
+      (units %in% c("ng/ml","ng/mL","ug/l","ug/L","µg/l","µg/L","pg/ml","pg/mL","ng/L")) ~ "ng/L",
       (units %in% c("pg/g","µg/kg","ug/kg","ng/g")) ~ "ng/g")) %>%
     select(-UNITFACTOR)
 
   #4A. Units test.
   if (length(unique(data$units)) > 1){
-    stop(str_c("Different unit metrics for media. ",unique(data$media)," units are: ",
+    stop(str_c("Different unit metrics for same media. units are: ",
                paste(unique(data$units),collapse = ", "),". Please resolve to one metric unit in input."))
   }
 
@@ -133,7 +137,6 @@ LEEM_Concentration <- function(data, wtcol, n, seed=NULL){
   used     <-  data[complete.cases(data$gsd,data$gm,data[,(wtcol)]),]
   notused  <-  data[!complete.cases(data$gsd,data$gm,data[,(wtcol)]),]
 
-
   # 9. Summarize output
   sumstats<- function(x){
     sumstats <- t(quantile(x,c(0,.10,.5,.75,.95,1)))
@@ -173,26 +176,28 @@ colnames(scount)<- c("Chemical","Stuides Used")
 
     return(filename)
   }
-  filename  <- namer('LEM Concentration Results')
+  filename  <- namer('LEEM Concentration Results')
 
 
-  metadata <- data.frame("Date" = filename,
+  metadata <- data.frame("Name" = filename,
                          "n" = n,
                          "Seed" = seed,
-                         "Chemicals" = paste(unique(data$chemical),collapse = ", "))
+                         "Chemical" = paste(unique(data$chemical),collapse = ", "))
 
   metadata[]<- lapply(metadata, as.character)
 
   # 11. Compile list of results
   finished <- list("Summary"   = summary,
-                   "Data"      = used,
-                   "Not Used"  = notused,
-                   "Used Row Count" = scount,
+                   "Used Input"      = used,
+                   "Excluded Input"  = notused,
+                   "Used Dataset Counts" = scount,
                    "Raw"       = Concentration,
                    "Metadata"  = metadata)
 
+  cat(str_c("LEEM-R (Concentration Only) Complete.
 
-  cat(str_c("LEEM-R Concentration complete."))
+"))
+
   return(finished)
 }
 
